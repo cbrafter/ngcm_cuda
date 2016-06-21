@@ -1,11 +1,12 @@
-#include<stdio.h>
+#include <stdio.h>
+__global__ void helloWorld(float f) 
+{
+	printf("Hello thread %d, f=%f\n", threadIdx.x, f);
+}
 
-__global__ void mykernel(void) 
-{} 
-
-int main(void) 
-{ 
-	mykernel<<<1,1>>>(); 
-	printf("Hello World!\n"); 
-	return 0; 
+int main() 
+{
+	helloWorld<<<1, 10>>>(1.2345f); 
+	cudaDeviceReset();
+	return 0;
 }
