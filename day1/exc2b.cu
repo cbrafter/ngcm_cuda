@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
     printf("Time to calculate results on GPU: %f ms.\n", elapsedTime);
 
     //copy the results to host
-    cudaMemcpy(c_h, c_d, size ,cudaMemcpyDeviceToHost);
+    cudaMemcpy(&c_h, &c_d, size, cudaMemcpyDeviceToHost);
 
     //grid and block sizes
     //CPU computation//////////////////////////////////
@@ -122,8 +122,6 @@ int main(int argc, char *argv[])
 
     //do the calculation on host
     matrixAdd(a_h, b_h, d_h, N);
-
-
 
     //stop timer
     cudaEventRecord(stop, 0);
