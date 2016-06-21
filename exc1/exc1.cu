@@ -10,7 +10,8 @@ __global__ void helloWorld(float f)
 
 int main() 
 {
-	helloWorld<<<1, 10>>>(1.2345f); 
+	/*helloWorld<<<1, 10>>>(1.2345f);*/ 
+	helloWorld<<<2, 5>>>(1.2345f); 
 	cudaDeviceReset();
 	return 0;
 }
