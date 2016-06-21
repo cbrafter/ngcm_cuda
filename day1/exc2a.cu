@@ -17,8 +17,8 @@ __global__ void vectorAddKernel(int *a, int *b, int *c)
 int main() 
 {
     //grid and block sizes
-    dim3 grid(1, 1, 1);
-    dim3 block(1, 1, 1);
+    dim3 grid(4, 4, 1);
+    dim3 block(16, 16, 1);
 
     //host arrays
     int a_h[N];
@@ -81,7 +81,7 @@ int main()
     cudaFree(a_h);
     cudaFree(b_h);
     cudaFree(c_h);
-    
+
     cudaEventDestroy(start);
     cudaEventDestroy(stop);
 
