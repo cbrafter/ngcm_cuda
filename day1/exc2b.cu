@@ -29,13 +29,13 @@ void matrixAdd(int *a, int *b, int *c, int N)
 int main(int argc, char *argv[])
 {
     //matrix size in each dimension
-    int N = 10;
+    int N = 4096;
 
     //grid and block sizes
     //dim3 grid(4, 4, 1);
     //dim3 block(16, 16, 1);
-    dim3 grid(2, 5, 1);
-    dim3 block(2, 5, 1);
+    dim3 grid(N/32, N/32, 1);
+    dim3 block(32, 32, 1);
 
     //host memory pointers
     int *a_h;
@@ -135,7 +135,7 @@ int main(int argc, char *argv[])
     for(int i=0; i<N*N; i++)
     {
         if (c_h[i] != d_h[i]) printf("Error: CPU and GPU results do not match\n");
-            break;
+            break; 
     }
 
     //clean up
