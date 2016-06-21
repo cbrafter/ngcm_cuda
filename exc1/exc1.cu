@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-__global__ voidmykernel(void) 
+__global__ void mykernel(void) 
 {} 
 
 intmain(void) 
