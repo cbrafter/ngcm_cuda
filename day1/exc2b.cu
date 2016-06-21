@@ -36,6 +36,9 @@ int main(int argc, char *argv[])
     //dim3 block(16, 16, 1);
     dim3 grid(N/32, N/32, 1);
     dim3 block(32, 32, 1);
+    /* Block has 1024 threads, so use this many and grid as many multiprocessors
+    (blocks) as you need. Exception is if you aren't fully utilising all blocks
+    then reduce number of threads and distribute among all blocks*/
 
     //host memory pointers
     int *a_h;
@@ -135,7 +138,7 @@ int main(int argc, char *argv[])
     for(int i=0; i<N*N; i++)
     {
         if (c_h[i] != d_h[i]) printf("Error: CPU and GPU results do not match\n");
-            break; 
+            break;
     }
 
     //clean up
