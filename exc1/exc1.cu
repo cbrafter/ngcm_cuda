@@ -3,7 +3,7 @@
 __global__ void mykernel(void) 
 {} 
 
-intmain(void) 
+int main(void) 
 { 
 	mykernel<<<1,1>>>(); 
 	printf("Hello World!\n"); 
