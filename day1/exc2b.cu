@@ -90,9 +90,9 @@ int main(int argc, char *argv[])
     cudaMalloc((void**)&c_d, size);
 
     //copy the host arrays to device
-    cudaMemcpy(a_d, a_h, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(b_d, b_h, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(c_d, c_h, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(&a_d, &a_h, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(&b_d, &b_h, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(&c_d, &c_h, size, cudaMemcpyHostToDevice);
 
     //start timer
     cudaEventCreate(&start);
