@@ -32,8 +32,8 @@ int main(int argc, char *argv[])
     int N = 10;
 
     //grid and block sizes
-    dim3 grid(1, 1, 1);
-    dim3 block(1, 1, 1);
+    dim3 grid(4, 4, 1);
+    dim3 block(16, 16, 1);
 
     //host memory pointers
     int *a_h;

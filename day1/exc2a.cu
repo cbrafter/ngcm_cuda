@@ -17,8 +17,8 @@ __global__ void vectorAddKernel(int *a, int *b, int *c)
 int main() 
 {
     //grid and block sizes
-    dim3 grid(4, 4, 1);
-    dim3 block(16, 16, 1);
+    dim3 grid(16, 1, 1);
+    dim3 block(256, 1, 1);
 
     //host arrays
     int a_h[N];
@@ -43,9 +43,9 @@ int main()
     cudaMalloc((void**)&c_d, N*sizeof(int));
 
     //copy the host arrays to device
-    cudaMemcpy(a_d, a_h, N*sizeof(int), cudaMemcpyHostToDevice);
-    cudaMemcpy(b_d, b_h, N*sizeof(int), cudaMemcpyHostToDevice);
-    cudaMemcpy(c_d, c_h, N*sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(&a_d, &a_h, N*sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(&b_d, &b_h, N*sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(&c_d, &c_h, N*sizeof(int), cudaMemcpyHostToDevice);
 
     //CUDA events to measure time
     cudaEvent_t start;
