@@ -6,14 +6,14 @@ int main(void)
 {
 	int deviceCount;
 	cudaGetDeviceCount(&deviceCount);
-	printf("\nNumber of GPU devices: %i\n", deviceCount);
+	printf("Number of GPU devices: %i\n", deviceCount);
 
 	int driverVersion;
 	int runtimeVersion;
 	cudaDriverGetVersion(&driverVersion); 
 	cudaRuntimeGetVersion(&runtimeVersion);
 	cudaDeviceProp deviceProperties;
-	printf("CUDA Driver Version / Runtime Version: %d.%d / %d.%d\n\n\n", 
+	printf("CUDA Driver Version / Runtime Version: %d.%d / %d.%d\n\n", 
 		driverVersion/1000, (driverVersion%100)/10, runtimeVersion/1000, 
 		(runtimeVersion%100)/10);
 
