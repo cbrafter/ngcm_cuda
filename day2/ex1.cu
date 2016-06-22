@@ -2,7 +2,7 @@
 #include "device_launch_parameters.h" 
 #include <stdio.h>
 
-int int main(void)
+int main(void)
 {
 	int deviceCount;
 	cudaGetDeviceCount(&deviceCount);
