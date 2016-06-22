@@ -29,11 +29,11 @@ void matrixAdd(int *a, int *b, int *c, int N)
 int main(int argc, char *argv[])
 {
     //matrix size in each dimension
-    int N = 10;
+    int N = 4096;
 
     //grid and block sizes
-    dim3 grid(1, 1, 1);
-    //dim3 grid(N/32, N/32, 1);
+    //dim3 grid(1, 1, 1);
+    dim3 grid(N/32, N/32, 1);
     dim3 block(32, 32, 1);
     /* Block has 1024 threads, so use this many and grid as many multiprocessors
     (blocks) as you need. Exception is if you aren't fully utilising all blocks
