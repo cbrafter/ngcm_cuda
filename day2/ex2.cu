@@ -68,7 +68,7 @@ int main(void)
 	//stream 1
 	cudaMemcpyAsync(a_d[1], a_h[1], (N/2)*sizeof(int), 
 		cudaMemcpyHostToDevice, stream[1]);
-	mulAddKernel <<<grid, block, 0, stream[1]>>>(a_d[1], c_d[1]); 
+	mulKernel <<<grid, block, 0, stream[1]>>>(a_d[1], c_d[1]); 
 	cudaMemcpyAsync(c_h[1], c_d[1], (N/2)*sizeof(int), 
 		cudaMemcpyDeviceToHost,	stream[1]);
 
