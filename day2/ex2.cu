@@ -60,17 +60,17 @@ int main(void)
     dim3 block(32, 32, 1);
 
 	// stream 0
-	cudaMemcpyAsync(a_d[0], a_h[0], (N/2)*sizeof(int), 
+	cudaMemcpyAsync(&a_d[0], &a_h[0], (N/2)*sizeof(int), 
 		cudaMemcpyHostToDevice, stream[0]);
 	mulKernel <<< grid, block, 0, stream[0]>>>(a_d[0], c_d[0]); 
-	cudaMemcpyAsync(c_h[0], c_d[0], (N/2)*sizeof(int), 
+	cudaMemcpyAsync(&c_h[0], &c_d[0], (N/2)*sizeof(int), 
 		cudaMemcpyDeviceToHost, stream[0]);
 
 	//stream 1
-	cudaMemcpyAsync(a_d[1], a_h[1], (N/2)*sizeof(int), 
+	cudaMemcpyAsync(&a_d[1], &a_h[1], (N/2)*sizeof(int), 
 		cudaMemcpyHostToDevice, stream[1]);
 	mulKernel <<<grid, block, 0, stream[1]>>>(a_d[1], c_d[1]); 
-	cudaMemcpyAsync(c_h[1], c_d[1], (N/2)*sizeof(int), 
+	cudaMemcpyAsync(&c_h[1], &c_d[1], (N/2)*sizeof(int), 
 		cudaMemcpyDeviceToHost,	stream[1]);
 
 	//stop timer
