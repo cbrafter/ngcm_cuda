@@ -137,6 +137,7 @@ int main(int argc, char *argv[])
     //check if the CPU and GPU results match
     for(int i=0; i<N*N; i++)
     {
+        printf("%d\n", i);
         if (c_h[i] != d_h[i]) 
             printf("Error: CPU and GPU results do not match\n");
             break;
