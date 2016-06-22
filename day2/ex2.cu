@@ -88,7 +88,7 @@ int main(void)
 	{
 		if (2*a_h[0][ii] != c_h[0][ii] || 2*a_h[1][ii] != c_h[1][ii])
 		{
-			printf("Error: CPU and GPU result [%d] do not match\n", i);
+			printf("Error: CPU and GPU result [%d] do not match\n", ii);
 			printf("CPU0:%d GPU0:%d\n", 2*a_h[0][ii], c_h[0][ii]);
 			printf("CPU1:%d GPU1:%d\n", 2*a_h[1][ii], c_h[1][ii]);
 			break;
