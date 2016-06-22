@@ -2,6 +2,8 @@
 #include "device_launch_parameters.h" 
 #include <stdio.h>
 
+#define N 4096000
+
 __global__ void mulKernel(int *a, int *c) 
 {
 	int tdx = blockIdx.x * blockDim.x + threadIdx.x; 
@@ -30,7 +32,7 @@ int main(void)
 
 		//allocate device memory 
 		cudaMalloc((void**)&a_d[i], (N/2)*sizeof(int));
-		cudaMalloc((void**)&b_d[i], (N/2)*sizeof(int));
+		//cudaMalloc((void**)&b_d[i], (N/2)*sizeof(int));
 		cudaMalloc((void**)&c_d[i], (N/2)*sizeof(int));
 	}
 	//load arrays with some numbers 
@@ -51,18 +53,22 @@ int main(void)
 	cudaEventCreate(&start); 
 	cudaEventCreate(&stop); 
 	cudaEventRecord(start, 0);
-	
+
+	// grid and block size stuff
+	dim3 grid(N/32, N/32, 1);
+    dim3 block(32, 32, 1);
+
 	// stream 0
 	cudaMemcpyAsync(a_d[0], a_h[0], (N/2)*sizeof(int), 
 		cudaMemcpyHostToDevice, stream[0]);
-	vectorAddKernel <<< XX, XX, 0, stream[0]>>>(a_d[0], c_d[0]); 
+	mulKernel <<< grid, block, 0, stream[0]>>>(a_d[0], c_d[0]); 
 	cudaMemcpyAsync(c_h[0], c_d[0], (N/2)*sizeof(int), 
 		cudaMemcpyDeviceToHost, stream[0]);
 
 	//stream 1
 	cudaMemcpyAsync(a_d[1], a_h[1], (N/2)*sizeof(int), 
 		cudaMemcpyHostToDevice, stream[1]);
-	vectorAddKernel <<<XX, XX, 0, stream[1]>>>(a_d[1], c_d[1]); 
+	mulAddKernel <<<grid, block, 0, stream[1]>>>(a_d[1], c_d[1]); 
 	cudaMemcpyAsync(c_h[1], c_d[1], (N/2)*sizeof(int), 
 		cudaMemcpyDeviceToHost,	stream[1]);
 
