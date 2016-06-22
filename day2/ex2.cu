@@ -35,6 +35,7 @@ int main(void)
 		//cudaMalloc((void**)&b_d[i], (N/2)*sizeof(int));
 		cudaMalloc((void**)&c_d[i], (N/2)*sizeof(int));
 	}
+
 	//load arrays with some numbers 
 	for(int i=0; i<2; i++)
 	{
@@ -79,8 +80,19 @@ int main(void)
 	
 	//print out execution time
 	printf("Time to calculate results: %f ms.\n", elapsedTime);
-	cudaEventDestroy(start); cudaEventDestroy(stop);
+	cudaEventDestroy(start); 
+	cudaEventDestroy(stop);
 	
+	// Check results
+	for(int ii=0; ii<N/2; ii++) 
+	{
+		if (2*a_h[0][ii] != c_h[0][ii] || 2*a_h[1][ii] != c_h[1][ii])
+		{
+			printf("Error: CPU and GPU results do not match\n");
+			break;
+		}
+	}
+
 	for (int i = 0; i < 2; ++i) 
 	{
 		cudaStreamDestroy(stream[i]); 
