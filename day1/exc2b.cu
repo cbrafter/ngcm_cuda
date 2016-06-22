@@ -29,7 +29,7 @@ void matrixAdd(int *a, int *b, int *c, int N)
 int main(int argc, char *argv[])
 {
     //matrix size in each dimension
-    int N = 4096;
+    int N = 10;
 
     //grid and block sizes
     //dim3 grid(4, 4, 1);
